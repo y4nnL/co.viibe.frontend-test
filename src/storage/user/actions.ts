@@ -1,21 +1,34 @@
 import { User } from '../types'
 
 declare module '../types' {
+  
   namespace User {
+    
+    type LoginPayload = {
+      email: string,
+      password: string
+    }
+    
     type ActionTree = {
-      userLogin: Action<User.ActionContext, Promise<boolean>, { email: string }>;
+      userLogin: Action<User.ActionContext, Promise<boolean>, LoginPayload>;
       userLogout: Action<User.ActionContext, boolean>;
     }
+    
   }
+  
 }
 
 const actionTree: User.ActionTree = {
-  async userLogin({ state, commit }, payload): Promise<boolean> {
+  async userLogin({ state, commit }, loginPayload): Promise<boolean> {
     if (state.email) {
       return false
     } else {
-      commit('userEmail', payload.email)
-      return true
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          commit('userEmail', loginPayload.email)
+          resolve(true)
+        }, 2000)
+      })
     }
   },
   userLogout({ state, commit }): boolean {

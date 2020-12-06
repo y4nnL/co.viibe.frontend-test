@@ -9,7 +9,7 @@ declare module '../types' {
 }
 
 const state: User.State = {
-  email: 'stock@stock.stock',
+  email: '',
 }
 
 export default state
