@@ -1,0 +1,176 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Variables
+
+$left: 50%
+$scale: .2
+$opacity: 0
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Component
+
+.app
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  overflow: hidden
+
+.app_content
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: calc(100% - 50px)
+  z-index: 1
+
+.app_footer
+  display: flex
+  position: absolute
+  bottom: 0
+  left: 0
+  width: 100%
+  height: 50px
+  background: #F6F6F6
+  z-index: 2
+
+.app_footer_link
+  flex: 25%
+  display: flex !important
+  align-items: center
+  justify-content: center
+  overflow: hidden
+
+  &.-active
+    background: #AAA
+    color: white
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Globals
+
+.header
+  position: fixed
+  width: 100%
+  height: 50px
+  background: #EEE
+  z-index: 2
+
+.header_baseline
+  position: relative
+  & > *
+    position: absolute
+    top: 0
+    left: 0
+
+.page
+  box-sizing: border-box
+  position: absolute
+  top: 50px
+  left: 0
+  width: 100%
+  height: calc(100% - 50px)
+  overflow: auto
+  z-index: 1
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Animations
+
+.-toggle-enter-active,
+.-toggle-leave-active
+  transition: bottom .25s ease-in-out
+
+.-toggle-enter,
+.-toggle-leave-to
+  bottom: -51px
+
+////////// Slide Left/Right
+
+.-slide-left-enter-active,
+.-slide-left-leave-active,
+.-slide-right-enter-active,
+.-slide-right-leave-active
+  transition: left .25s ease-in-out, opacity .25s linear
+
+.-slide-left-enter,
+.-slide-right-leave-to
+  left: $left
+  opacity: $opacity
+
+.-slide-left-leave-to,
+.-slide-right-enter
+  left: $left * -1
+  opacity: $opacity
+
+.-slide-short-left-enter-active,
+.-slide-short-left-leave-active,
+.-slide-short-right-enter-active,
+.-slide-short-right-leave-active
+  transition: left .25s ease-in-out, opacity .25s linear
+
+.-slide-short-left-enter,
+.-slide-short-right-leave-to
+  left: $left * .2
+  opacity: $opacity
+
+.-slide-short-left-leave-to,
+.-slide-short-right-enter
+  left: $left * -.2
+  opacity: $opacity
+
+////////// Dive/Jump straight
+
+.-jump-enter-active,
+.-jump-leave-active,
+.-dive-enter-active,
+.-dive-leave-active
+  transition: transform .25s ease-in-out, opacity .25s linear
+
+.-jump-enter,
+.-dive-leave-to
+  transform: scale(1 + $scale)
+  opacity: $opacity
+
+.-jump-leave-to,
+.-dive-enter
+  transform: scale(1 - $scale)
+  opacity: $opacity
+
+////////// Jump/Dive Left/Right
+
+.-dive-left-enter-active,
+.-dive-left-leave-active,
+.-dive-right-enter-active,
+.-dive-right-leave-active
+  transition: transform .25s ease-in, opacity .25s linear, left .25s ease-out
+
+.-jump-left-enter-active,
+.-jump-left-leave-active,
+.-jump-right-enter-active,
+.-jump-right-leave-active
+  transition: transform .25s ease-out, opacity .25s linear, left .25s ease-in
+
+.-jump-left-enter,
+.-dive-left-leave-to,
+.-jump-right-enter,
+.-dive-right-leave-to
+  transform: scale(1 + $scale)
+  opacity: $opacity
+
+.-jump-left-leave-to,
+.-dive-left-enter,
+.-jump-right-leave-to,
+.-dive-right-enter
+  transform: scale(1 - $scale)
+  opacity: $opacity
+
+.-jump-left-enter,
+.-dive-left-enter,
+.-jump-right-leave-to,
+.-dive-right-leave-to
+  left: $left
+
+.-jump-left-leave-to,
+.-dive-left-leave-to,
+.-jump-right-enter,
+.-dive-right-enter
+  left: $left * -1
