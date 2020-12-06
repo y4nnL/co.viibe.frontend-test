@@ -37,7 +37,6 @@ const main: ComponentOptions<Vue> = {
 async function launch() {
   await boot.router({ main: main, router, storage })
   await boot.storage({ main: main, router, storage })
-  await boot.user({ main: main, router, storage })
 }
 
 launch()

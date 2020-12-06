@@ -11,23 +11,8 @@
            v-if="isAuthenticated">
         <router-link active-class="-active"
                      class="app_footer_link"
-                     :to="$routes.stock">
-          Stock
-        </router-link>
-        <router-link active-class="-active"
-                     class="app_footer_link"
-                     :to="$routes.shopping">
-          Shopping
-        </router-link>
-        <router-link active-class="-active"
-                     class="app_footer_link"
-                     :to="$routes.settings">
-          Settings
-        </router-link>
-        <router-link active-class="-active"
-                     class="app_footer_link"
-                     :to="$routes.workout">
-          Workout
+                     :to="$routes.home">
+          Home
         </router-link>
         <router-link active-class="-active"
                      class="app_footer_link"

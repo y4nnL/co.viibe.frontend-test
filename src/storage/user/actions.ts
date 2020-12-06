@@ -1,11 +1,10 @@
-import { User, UserRole } from '../types'
+import { User } from '../types'
 
 declare module '../types' {
   namespace User {
     type ActionTree = {
-      userLogin: Action<ActionContext, Promise<boolean>, { email: string }>;
-      userLogout: Action<ActionContext, boolean>;
-      userToggleRole: Action<ActionContext, Promise<UserRole>>;
+      userLogin: Action<User.ActionContext, Promise<boolean>, { email: string }>;
+      userLogout: Action<User.ActionContext, boolean>;
     }
   }
 }
@@ -26,10 +25,6 @@ const actionTree: User.ActionTree = {
     } else {
       return false
     }
-  },
-  async userToggleRole({ state, commit }): Promise<UserRole> {
-    commit('userRole', state.role === UserRole.Admin ? UserRole.User : UserRole.Admin)
-    return state.role
   },
 }
 

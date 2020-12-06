@@ -3,7 +3,6 @@ import Vue from 'vue'
 import { RouteNames, routes, AppRouteConfig } from '@/router/routes'
 import { Boot } from '@/app'
 import { NavigationGuard } from 'vue-router'
-import { UserRole } from '@/storage/types'
 
 declare module 'vue/types/vue' {
   interface Vue {
@@ -42,7 +41,7 @@ export default function ({ router, storage }: Boot): void {
   storage.watch<boolean>(
     (state, getters) => getters.userIsAuthenticated,
     (userIsAuthenticated) => {
-      router.push({ name: userIsAuthenticated ? RouteNames.Stock : RouteNames.Auth })
+      router.push({ name: userIsAuthenticated ? RouteNames.Home : RouteNames.Auth })
     },
   )
   
@@ -50,27 +49,8 @@ export default function ({ router, storage }: Boot): void {
   const authGuard: NavigationGuard = (to, from, next) => {
     (to as AppRouteConfig).meta.auth ?
       (storage.getters.userIsAuthenticated ? next() : next({ name: RouteNames.Auth })) :
-      (storage.getters.userIsAuthenticated ? next({ name: RouteNames.Stock }) : next())
-  }
-  
-  // Check that the user is of the right role when a role protected route is matched
-  const rolesGuard: NavigationGuard = (to, from, next) => {
-    let roles = (to as AppRouteConfig).meta.roles
-    if (roles.length > 0) {
-      if (
-        roles.some(role => role === UserRole.Any) ||
-        roles.some(role => role === storage.state.user.role) ||
-        storage.state.user.role === UserRole.Any
-      ) {
-        next()
-      } else {
-        next({ name: from.name || RouteNames.Default })
-      }
-    } else {
-      next()
-    }
+      (storage.getters.userIsAuthenticated ? next({ name: RouteNames.Home }) : next())
   }
   
   router.beforeEach(authGuard)
-  router.beforeEach(rolesGuard)
 }
