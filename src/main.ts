@@ -1,9 +1,11 @@
+import MuseUI from 'muse-ui'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import * as Vuex from 'vuex'
 import { ComponentOptions } from 'vue/types/options'
 import { CreateElement } from 'vue/types/vue'
 import { VNode } from 'vue'
+import 'muse-ui/dist/muse-ui.css'
 
 import AppComponent from '@/views/App'
 import routerOptions from '@/router'
@@ -22,6 +24,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
+Vue.use(MuseUI)
 
 const router = new VueRouter(routerOptions)
 const storage: Storage = new Vuex.Store(storageModule)
