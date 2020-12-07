@@ -11,6 +11,7 @@ declare module '../types' {
     }
     
     type ActionTree = {
+      userFetch: Action<User.ActionContext, Promise<boolean>>;
       userLogin: Action<User.ActionContext, Promise<boolean>, LoginPayload>;
       userLogout: Action<User.ActionContext, Promise<boolean>>;
     }
@@ -21,12 +22,16 @@ declare module '../types' {
 
 const actionTree: User.ActionTree = {
   
-  async userLogin({ commit }, loginPayload): Promise<boolean> {
-    return API.login(loginPayload.email, loginPayload.password)
-      .then(() => API.me())
+  async userFetch({ commit }): Promise<boolean> {
+    return API.me()
       .then((response) => commit('userData', <User.Data>response.data))
       .then(() => true)
       .catch(() => false)
+  },
+  
+  async userLogin({ commit }, loginPayload): Promise<boolean> {
+    return API.login(loginPayload.email, loginPayload.password)
+      .then(() => this.dispatch('userFetch', void 0))
   },
   
   async userLogout({ commit }): Promise<boolean> {

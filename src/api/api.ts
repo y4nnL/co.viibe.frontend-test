@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { HttpResponse } from 'vue-resource/types/vue_resource'
 
 let baseUrl:URL = new URL(window.location.href)
-let authToken: string = ''
+let authToken: string = window.localStorage.getItem('authToken') || ''
 
 export default {
   
@@ -12,6 +12,9 @@ export default {
   
   set authToken(token: string) {
     authToken = token
+    authToken ?
+      window.localStorage.setItem('authToken', authToken) :
+      window.localStorage.removeItem('authToken')
   },
   
   get baseUrl(): URL {
