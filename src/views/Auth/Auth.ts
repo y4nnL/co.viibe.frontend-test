@@ -25,9 +25,9 @@ export default class Auth extends Vue {
         password: this.model.password.value,
       }
       this.$storage.dispatch('userLogin', payload)
-        .catch(() => {
+        .then((isUserLoggedIn: boolean) => {
           this.isSubmitting = false
-          this.hasSubmitFailed = true
+          this.hasSubmitFailed = !isUserLoggedIn
         })
     }
   }

@@ -1,3 +1,4 @@
+import API from '@/api'
 import { User } from '../types'
 
 declare module '../types' {
@@ -11,7 +12,7 @@ declare module '../types' {
     
     type ActionTree = {
       userLogin: Action<User.ActionContext, Promise<boolean>, LoginPayload>;
-      userLogout: Action<User.ActionContext, boolean>;
+      userLogout: Action<User.ActionContext, Promise<boolean>>;
     }
     
   }
@@ -19,26 +20,33 @@ declare module '../types' {
 }
 
 const actionTree: User.ActionTree = {
+  
   async userLogin({ state, commit }, loginPayload): Promise<boolean> {
     if (state.email) {
       return false
     } else {
-      return new Promise((resolve) => {
-        setTimeout(() => {
+      return API.login(loginPayload.email, loginPayload.password)
+        .then(() => {
           commit('userEmail', loginPayload.email)
-          resolve(true)
-        }, 2000)
-      })
+          return true
+        })
+        .catch(() => false)
     }
   },
-  userLogout({ state, commit }): boolean {
+  
+  async userLogout({ state, commit }): Promise<boolean> {
     if (state.email) {
-      commit('userEmail', '')
-      return true
+      return API.logout()
+        .then(() => {
+          commit('userEmail', '')
+          return true
+        })
+        .catch(() => false)
     } else {
       return false
     }
   },
+  
 }
 
 export default actionTree

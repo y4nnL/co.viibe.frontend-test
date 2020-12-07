@@ -1,5 +1,6 @@
 import MuseUI from 'muse-ui'
 import Vue from 'vue'
+import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
 import * as Vuex from 'vuex'
 import { ComponentOptions } from 'vue/types/options'
@@ -22,9 +23,10 @@ declare module 'vue/types/options' {
 Vue.config.devtools = true
 Vue.config.productionTip = false
 
+Vue.use(MuseUI)
+Vue.use(VueResource)
 Vue.use(VueRouter)
 Vue.use(Vuex)
-Vue.use(MuseUI)
 
 const router = new VueRouter(routerOptions)
 const storage: Storage = new Vuex.Store(storageModule)
@@ -38,6 +40,7 @@ const main: ComponentOptions<Vue> = {
 }
 
 async function launch() {
+  await boot.http({ main: main, router, storage })
   await boot.router({ main: main, router, storage })
   await boot.storage({ main: main, router, storage })
 }
