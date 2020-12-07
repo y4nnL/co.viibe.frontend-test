@@ -7,6 +7,7 @@ import { NavigationGuard } from 'vue-router'
 declare module 'vue/types/vue' {
   interface Vue {
     $routes: { [name in RouteNames]: string };
+    $RouteNames: typeof RouteNames;
   }
 }
 
@@ -29,6 +30,7 @@ export default function ({ router, storage }: Boot): void {
   // Put each RouteConfig name in the $routes dictionary with the corresponding RouteConfig path so the views have
   // access to named routes
   Vue.prototype.$routes = {}
+  Vue.prototype.$RouteNames = RouteNames
   Object.values(RouteNames)
     .forEach((name: string) => {
       let route = findRouteByName(name, routes)
