@@ -14,6 +14,7 @@ declare module '../types' {
       userFetch: Action<User.ActionContext, Promise<boolean>>;
       userLogin: Action<User.ActionContext, Promise<boolean>, LoginPayload>;
       userLogout: Action<User.ActionContext, Promise<boolean>>;
+      userListFetch: Action<User.ActionContext, Promise<User.Data[]>>;
     }
     
   }
@@ -39,6 +40,13 @@ const actionTree: User.ActionTree = {
       .then(() => commit('userData', null))
       .then(() => true)
       .catch(() => false)
+  },
+  
+  async userListFetch(): Promise<User.Data[]> {
+    return API.users()
+      // TODO <yann> Cash strategy ?
+      .then((response) => <User.Data[]>response.data)
+      .catch(() => [])
   },
   
 }

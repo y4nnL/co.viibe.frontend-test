@@ -51,4 +51,13 @@ export default {
     const url = new URL('auth/me', this.baseUrl)
     return Vue.http.get(url.toString())
   },
+  
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // User
+  
+  async users(): Promise<HttpResponse> {
+    const url = new URL('users', this.baseUrl)
+    return Vue.http.get(url.toString())
+  },
+  
 }

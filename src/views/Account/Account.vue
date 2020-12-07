@@ -4,9 +4,9 @@
 <template>
   <div class="account">
     <mu-card>
-      <mu-card-header :title="firstName + ' ' + lastName"
+      <mu-card-header :title="{ firstName, lastName } | name"
                       :sub-title="email">
-        <mu-avatar slot="avatar">{{ initials }}</mu-avatar>
+        <mu-avatar slot="avatar">{{ { firstName, lastName } | initials }}</mu-avatar>
       </mu-card-header>
       <mu-button @click="logout"
                  flat>

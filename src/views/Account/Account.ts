@@ -1,6 +1,10 @@
 import { Component, Vue } from 'vue-property-decorator'
 
-@Component
+import { initials, name } from '@/filters/user'
+
+@Component({
+  filters: { initials, name },
+})
 export default class Account extends Vue {
   
   email: string = ''
