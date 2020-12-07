@@ -29,12 +29,23 @@ export default {
     const url = new URL('auth/login', this.baseUrl)
     const body = { email, password }
     return Vue.http.post(url.toString(), body)
-      .then(response => this.authToken = response.data.token)
+      .then(response => {
+        this.authToken = <string>response.data.token
+        return response
+      })
   },
   
-  async logout() {
+  async logout(): Promise<HttpResponse> {
     const url = new URL('auth/logout', this.baseUrl)
     return Vue.http.get(url.toString())
-      .then(response => this.authToken = '')
+      .then(response => {
+        this.authToken = ''
+        return response
+      })
+  },
+  
+  async me(): Promise<HttpResponse> {
+    const url = new URL('auth/me', this.baseUrl)
+    return Vue.http.get(url.toString())
   },
 }

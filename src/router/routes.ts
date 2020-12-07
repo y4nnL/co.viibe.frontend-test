@@ -31,7 +31,7 @@ const accountRoute: AppRouteConfig = {
   meta: {
     auth: true,
     level: 2,
-    position: 5,
+    position: 2,
   },
 }
 

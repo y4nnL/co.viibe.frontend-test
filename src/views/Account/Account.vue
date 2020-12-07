@@ -3,43 +3,16 @@
 
 <template>
   <div class="account">
-    <button @click="logout">logout</button> <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
-    Account Account Account Account Account <br>
+    <mu-card>
+      <mu-card-header :title="firstName + ' ' + lastName"
+                      :sub-title="email">
+        <mu-avatar slot="avatar">{{ initials }}</mu-avatar>
+      </mu-card-header>
+      <mu-button @click="logout"
+                 flat>
+        Logout
+      </mu-button>
+    </mu-card>
   </div>
 </template>
 

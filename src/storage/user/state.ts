@@ -3,13 +3,19 @@ import { User } from '../types'
 declare module '../types' {
   namespace User {
     type State = {
-      email: string;
+      data: User.Data
     }
   }
 }
 
 const state: User.State = {
-  email: '',
+  data: {
+    _id: -1,
+    address: { city: '', postalCode: 0 },
+    email: '',
+    firstName: '',
+    lastName: '',
+  },
 }
 
 export default state

@@ -21,30 +21,19 @@ declare module '../types' {
 
 const actionTree: User.ActionTree = {
   
-  async userLogin({ state, commit }, loginPayload): Promise<boolean> {
-    if (state.email) {
-      return false
-    } else {
-      return API.login(loginPayload.email, loginPayload.password)
-        .then(() => {
-          commit('userEmail', loginPayload.email)
-          return true
-        })
-        .catch(() => false)
-    }
+  async userLogin({ commit }, loginPayload): Promise<boolean> {
+    return API.login(loginPayload.email, loginPayload.password)
+      .then(() => API.me())
+      .then((response) => commit('userData', <User.Data>response.data))
+      .then(() => true)
+      .catch(() => false)
   },
   
-  async userLogout({ state, commit }): Promise<boolean> {
-    if (state.email) {
-      return API.logout()
-        .then(() => {
-          commit('userEmail', '')
-          return true
-        })
-        .catch(() => false)
-    } else {
-      return false
-    }
+  async userLogout({ commit }): Promise<boolean> {
+    return API.logout()
+      .then(() => commit('userData', null))
+      .then(() => true)
+      .catch(() => false)
   },
   
 }

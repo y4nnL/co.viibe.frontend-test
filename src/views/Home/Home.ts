@@ -8,6 +8,6 @@ export default class Home extends Vue {
   }
   
   get userEmail() {
-    return this.$storage.state.user.email
+    return this.$storage.state.user.data.email
   }
 }

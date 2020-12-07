@@ -2,6 +2,14 @@ export namespace User {
   
   export const namespace = 'user'
   
+  export type Data = {
+    _id: number
+    address: { city: string; postalCode: number; }
+    email: string
+    firstName: string
+    lastName: string
+  }
+  
   export type ActionContext = {
     commit: Commit;
     dispatch: Dispatch;

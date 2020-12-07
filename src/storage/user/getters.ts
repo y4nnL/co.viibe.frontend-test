@@ -10,7 +10,7 @@ declare module '../types' {
 
 const getterTree: User.GetterTree = {
   userIsAuthenticated(state): boolean {
-    return !!state.email
+    return state.data._id >= 0
   },
 }
 
