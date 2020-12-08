@@ -15,6 +15,7 @@ declare module '../types' {
       userLogin: Action<User.ActionContext, Promise<boolean>, LoginPayload>;
       userLogout: Action<User.ActionContext, Promise<boolean>>;
       userListFetch: Action<User.ActionContext, Promise<User.Data[]>>;
+      userMessage: Action<User.ActionContext, Promise<boolean>, string>;
     }
     
   }
@@ -47,6 +48,12 @@ const actionTree: User.ActionTree = {
       // TODO <yann> Cash strategy ?
       .then((response) => <User.Data[]>response.data)
       .catch(() => [])
+  },
+  
+  async userMessage({}, message: string): Promise<boolean> {
+    return API.chat(message)
+      .then(() => true)
+      .catch(() => false)
   },
   
 }

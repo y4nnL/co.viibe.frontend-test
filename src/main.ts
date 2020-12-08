@@ -2,6 +2,7 @@ import MuseUI from 'muse-ui'
 import Vue from 'vue'
 import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
+import VueSocketIO from 'vue-socket.io'
 import * as Vuex from 'vuex'
 import { ComponentOptions } from 'vue/types/options'
 import { CreateElement } from 'vue/types/vue'
@@ -13,6 +14,7 @@ import routerOptions from '@/router'
 import storageModule from '@/storage'
 import * as boot from '@/boot'
 import { Storage } from '@/storage/types'
+import { Store } from 'vuex'
 
 declare module 'vue/types/options' {
   interface ComponentOptions<V extends Vue> {
@@ -38,6 +40,15 @@ const main: ComponentOptions<Vue> = {
   storage,
   router,
 }
+
+Vue.use(new VueSocketIO({
+  connection: process.env.VUE_APP_API_URL,
+  vuex: {
+    store: <Store<any>>storage,
+    // TODO <yann> Find a way to use camel case instead
+    mutationPrefix: 'chat_'
+  }
+}))
 
 async function launch() {
   await boot.http({ main: main, router, storage })

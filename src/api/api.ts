@@ -60,4 +60,13 @@ export default {
     return Vue.http.get(url.toString())
   },
   
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Chat
+  
+  async chat(message: string): Promise<HttpResponse> {
+    const url = new URL('chat', this.baseUrl)
+    const body = { message }
+    return Vue.http.post(url.toString(), body)
+  },
+  
 }

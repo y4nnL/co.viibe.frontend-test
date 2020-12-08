@@ -1,5 +1,7 @@
+import chatModule from './chat'
 import userModule from './user'
 import {
+  Chat,
   Root,
   User,
 } from './types'
@@ -7,6 +9,7 @@ import {
 const module: Root.Module = {
   modules: {
     [User.namespace]: userModule,
+    [Chat.namespace]: chatModule,
   },
   strict: true,
 }

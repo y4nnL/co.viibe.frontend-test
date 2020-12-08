@@ -12,14 +12,14 @@
     margin-right: 1rem
 
 .home_userList_box
-  padding: 1rem
+  padding: .5rem 1rem 1rem
   display: flex
   flex-wrap: nowrap
   overflow: auto
   position: relative
 
 .home_userList_item
-  flex: 0 0 65vw
+  flex: 0 0 40vw
   padding: 1rem 0 .7rem 0
   margin-right: 1rem
   max-width: 300px
@@ -29,6 +29,72 @@
 
   .mu-avatar
     margin-bottom: .6rem
+
+.home_chat_title
+  margin: 1rem 1rem .5rem 1rem
+
+.home_chat
+  display: flex
+  flex: 1
+  flex-direction: column
+  justify-content: flex-end
+  margin: 0 1rem
+  overflow: auto
+  background: white
+  border-top-right-radius: 5px
+  border-top-left-radius: 5px
+
+.home_chat_message,
+.home_chat_message.-me
+  display: flex
+  margin-top: .5rem
+
+.home_chat_message.-grouped,
+.home_chat_message.-grouped.-me
+  margin-top: .1rem
+
+.home_chat_message
+  margin-left: 1rem
+
+.home_chat_message.-me
+  margin-right: 1rem
+  justify-content: flex-end
+
+.home_chat_message_box
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+
+.home_chat_message_box_name
+  font-size: 90%
+  color: #888
+
+.home_chat_message_box_message
+  padding: .3rem .5rem
+  background: #E84
+  color: #FFF
+  max-width: 30vh
+  border-radius: 5px
+
+.home_chat_message.-me .home_chat_message_box_message
+  background: #888
+
+.home_chat_form
+  margin: .5rem 1rem 1rem
+  display: flex
+  background: white
+
+.home_chat_form_input
+  flex: 1
+  margin-right: 1rem
+
+.home_chat_form_submit
+  background: #DDD
+  color: #FFF
+
+.home_chat_form_submit.-active
+  background: #48F
+  color: #FFF
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Animations
