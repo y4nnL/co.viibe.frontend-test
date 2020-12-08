@@ -24,7 +24,8 @@
       </transition-group>
     </div>
     <h3 class="home_chat_title">Chat</h3>
-    <div class="home_chat">
+    <div class="home_chat"
+         ref="chat">
       <div v-for="(message, index) in messageList"
            :key="index"
            class="home_chat_message"

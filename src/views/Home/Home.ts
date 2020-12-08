@@ -17,6 +17,10 @@ export default class Home extends Vue {
   userList: User.Data[] = []
   userListNow: User.Data[] = []
   
+  $refs!: {
+    chat: HTMLElement
+  }
+  
   mounted() {
     setTimeout(() => {
       this.$storage.dispatch('userListFetch', void 0)
@@ -32,6 +36,10 @@ export default class Home extends Vue {
             })
         })
     }, LOADER_DELAY)
+  }
+  
+  updated() {
+    this.$refs.chat.scrollTo({ top: this.$refs.chat.scrollHeight })
   }
   
   sendMessage() {
