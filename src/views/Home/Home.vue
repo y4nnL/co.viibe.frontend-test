@@ -45,6 +45,7 @@
                      v-model="message" />
       <mu-button class="home_chat_form_submit"
                  :class="{ '-active' : canSendMessage }"
+                 @click="sendMessage"
                  flat>send
       </mu-button>
     </form>

@@ -36,6 +36,7 @@ export default class Home extends Vue {
   
   sendMessage() {
     if (this.canSendMessage) {
+      this.isSendingMessage = true
       this.$storage.dispatch('userMessage', this.message)
         .then((isMessageSent) => {
           if (isMessageSent) {
